@@ -1,18 +1,21 @@
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
 {
-    'name': 'Odoo 18 Accounting',
-    'version': '1.0.2',
+    'name': 'Odoo 17 Accounting',
+    'version': '2.0.2',
     'category': 'Accounting',
     'summary': 'Accounting Reports, Asset Management and Budget, Recurring Payments, '
                'Lock Dates, Fiscal Year, Accounting Dashboard, Financial Reports, '
                'Customer Follow up Management, Bank Statement Import',
-    'description': 'Odoo 18 Financial Reports, Asset Management and '
+    'description': 'Odoo 17 Financial Reports, Asset Management and '
                    'Budget, Financial Reports, Recurring Payments, '
                    'Bank Statement Import, Customer Follow Up Management,'
                    'Account Lock Date, Accounting Dashboard',
-    'live_test_url': 'https://www.youtube.com/c/OdooMates',
+    'live_test_url': 'https://www.walnutit.com',
     'sequence': '1',
-    'author': 'Odoo Mates, Odoo SA',
-    'maintainer': 'Odoo Mates',
+    'website': 'https://www.walnutit.com',
+    'author': 'Odoo Mates, Walnut Software Solutions, Odoo SA',
+    'maintainer': 'Odoo Mates, Walnut Software Solutions',
     'license': 'LGPL-3',
     'support': 'odoomates@gmail.com',
     'depends': [
@@ -37,6 +40,6 @@
         'views/account_journal.xml',
     ],
     'application': True,
-    'images': ['static/description/banner_new.gif'],
+    'images': ['static/description/banner.gif'],
 }
 

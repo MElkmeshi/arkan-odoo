@@ -1,9 +1,12 @@
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
 {
     'name': 'Cash Book, Day Book, Bank Book Financial Reports',
-    'version': '1.0.1',
+    'version': '17.0.1.1',
     'category': 'Invoicing Management',
-    'summary': 'Cash Book, Day Book and Bank Book Report For Odoo 18',
-    'description': 'Cash Book, Day Book and Bank Book Report For Odoo 18',
+    'summary': 'Cash Book, Day Book and Bank Book Report For Odoo 17',
+    'description': 'Cash Book, Day Book and Bank Book Report For Odoo 17',
     'sequence': '10',
     'author': 'Odoo Mates',
     'license': 'LGPL-3',
@@ -12,6 +15,7 @@
     'support': 'odoomates@gmail.com',
     'website': 'https://www.odoomates.tech',
     'depends': ['account', 'accounting_pdf_reports'],
+    'live_test_url': '',
     'data': [
         'security/ir.model.access.csv',
         'views/om_daily_reports.xml',

@@ -1,11 +1,14 @@
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
 {
-    'name': 'Odoo 18 Assets Management',
-    'version': '1.0.0',
+    'name': 'Odoo 17 Assets Management',
+    'version': '17.0.1.0.3',
     'author': 'Odoo Mates, Odoo SA',
     'depends': ['account'],
     'description': """Manage assets owned by a company or a person. 
         Keeps track of depreciation's, and creates corresponding journal entries""",
-    'summary': 'Odoo 18 Assets Management',
+    'summary': 'Odoo 17 Assets Management',
     'category': 'Accounting',
     'sequence': 10,
     'website': 'https://www.odoomates.tech',

@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import time
 from odoo import api, models, _
 from odoo.exceptions import UserError
@@ -85,7 +87,7 @@ class ReportDayBook(models.AbstractModel):
 
         if data['form'].get('journal_ids', False):
             codes = [journal.code for journal in
-                     self.env['account.journal'].browse(data['form']['journal_ids'])]
+                     self.env['account.journal'].search([('id', 'in', data['form']['journal_ids'])])]
         accounts = self.env['account.account'].search([])
         dates = []
         record = []

@@ -1,18 +1,20 @@
+# -*- coding: utf-8 -*-
+# Part of Odoo. See LICENSE file for full copyright and licensing details.
+
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
-
+# ---------------------------------------------------------
+# Budgets
+# ---------------------------------------------------------
 class AccountBudgetPost(models.Model):
     _name = "account.budget.post"
     _order = "name"
     _description = "Budgetary Position"
 
     name = fields.Char('Name', required=True)
-    account_ids = fields.Many2many(
-        'account.account', 'account_budget_rel', 'budget_id',
-        'account_id', 'Accounts',
-        domain=[('deprecated', '=', False)]
-    )
+    account_ids = fields.Many2many('account.account', 'account_budget_rel', 'budget_id', 'account_id', 'Accounts',
+        domain=[('deprecated', '=', False)])
     company_id = fields.Many2one('res.company', 'Company', required=True, default=lambda self: self.env.company)
 
     def _check_account_ids(self, vals):
@@ -175,10 +177,7 @@ class CrossoveredBudgetLines(models.Model):
 
                 where_query = analytic_line_obj._where_calc(domain)
                 analytic_line_obj._apply_ir_rules(where_query, 'read')
-                from_string, from_params = where_query.from_clause
-                where_string, where_params = where_query.where_clause
-                from_clause, where_clause, where_clause_params = from_string, where_string, from_params + where_params
-
+                from_clause, where_clause, where_clause_params = where_query.get_sql()
                 select = "SELECT SUM(amount) from " + from_clause + " where " + where_clause
 
             else:
@@ -190,10 +189,7 @@ class CrossoveredBudgetLines(models.Model):
                           ]
                 where_query = aml_obj._where_calc(domain)
                 aml_obj._apply_ir_rules(where_query, 'read')
-                from_string, from_params = where_query.from_clause
-                where_string, where_params = where_query.where_clause
-                from_clause, where_clause, where_clause_params = from_string, where_string, from_params + where_params
-
+                from_clause, where_clause, where_clause_params = where_query.get_sql()
                 select = "SELECT sum(credit)-sum(debit) from " + from_clause + " where " + where_clause
 
             self.env.cr.execute(select, where_clause_params)

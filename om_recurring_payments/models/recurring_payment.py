@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from datetime import date
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api, _
@@ -128,7 +130,7 @@ class RecurringPaymentLine(models.Model):
             'journal_id': self.journal_id.id,
             'company_id': self.company_id.id,
             'date': self.date,
-            'memo': self.recurring_payment_id.name,
+            'ref': self.recurring_payment_id.name,
             'partner_id': self.partner_id.id,
         }
         payment = self.env['account.payment'].create(vals)

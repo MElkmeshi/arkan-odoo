@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from odoo import fields, models, api, _
 from datetime import date
 
@@ -8,16 +10,20 @@ class AccountCashBookReport(models.TransientModel):
 
     def _get_default_account_ids(self):
         journals = self.env['account.journal'].search([('type', '=', 'cash')])
-        accounts = self.env['account.account']
+        accounts = []
         for journal in journals:
             if journal.default_account_id.id:
-                accounts += journal.default_account_id
+                accounts.append(journal.default_account_id.id)
+            if journal.company_id.account_journal_payment_credit_account_id.id:
+                accounts.append(journal.company_id.account_journal_payment_credit_account_id.id)
+            if journal.company_id.account_journal_payment_debit_account_id.id:
+                accounts.append(journal.company_id.account_journal_payment_debit_account_id.id)
             for acc_out in journal.outbound_payment_method_line_ids:
                 if acc_out.payment_account_id:
-                    accounts += acc_out.payment_account_id
+                    accounts.append(acc_out.payment_account_id.id)
             for acc_in in journal.inbound_payment_method_line_ids:
                 if acc_in.payment_account_id:
-                    accounts += acc_in.payment_account_id
+                    accounts.append(acc_in.payment_account_id.id)
         return accounts
 
     date_from = fields.Date(string='Start Date', default=date.today(), required=True)
@@ -42,6 +48,17 @@ class AccountCashBookReport(models.TransientModel):
                                      help='If you selected date, this field allow you to add a row to'
                                           ' display the amount of debit/credit/balance that precedes '
                                           'the filter you\'ve set.')
+
+    @api.onchange('account_ids')
+    def onchange_account_ids(self):
+        if self.account_ids:
+            journals = self.env['account.journal'].search(
+                [('type', '=', 'cash')])
+            accounts = []
+            for journal in journals:
+                accounts.append(journal.company_id.account_journal_payment_credit_account_id.id)
+            domain = {'account_ids': [('id', 'in', accounts)]}
+            return {'domain': domain}
 
     def _build_comparison_context(self, data):
         result = {}

@@ -1,6 +1,8 @@
+# -*- coding: utf-8 -*-
+
 {
     'name': 'Customer Follow Up Management',
-    'version': '1.0.1',
+    'version': '17.0.2.0.4',
     'category': 'Accounting',
     'description': """Customer FollowUp Management""",
     'summary': """Customer FollowUp Management""",
